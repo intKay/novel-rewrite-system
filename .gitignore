@@ -5,3 +5,10 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+.venv-win/
+outputs/
+projects/
+*.sqlite
+*.db
+.env
+.env.*

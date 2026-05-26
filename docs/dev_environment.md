@@ -37,6 +37,14 @@ python -m pip install -U pip
 
 如果使用 Python 3.12，可将 `py -3.11` 改为 `py -3.12`。
 
+WSL / Linux 环境如果已经安装 `python3.11`，推荐同样创建项目本地虚拟环境，不要直接向受管理的全局解释器安装依赖：
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+```
+
 ## 安装依赖
 
 项目使用 `pyproject.toml` 管理依赖。安装运行依赖和测试依赖：
@@ -60,6 +68,26 @@ python -m pytest
 ```powershell
 py -3.11 -m pytest
 ```
+
+WSL / Linux 下可使用虚拟环境中的解释器：
+
+```bash
+.venv/bin/python -m pytest
+```
+
+如果在 Windows 挂载目录或 Codex 环境中遇到 pytest 输出捕获的临时文件异常，可关闭捕获后重试：
+
+```bash
+.venv/bin/python -m pytest -s
+```
+
+## 模型策略
+
+- **cloud 模式（推荐）**：`story-rewrite --model-mode cloud`，全流程 DeepSeek API，仅需 `DEEPSEEK_API_KEY` 环境变量
+- **real 模式（可选）**：`story-rewrite --model-mode real`，改写阶段使用 Ollama，需本地安装 Ollama 并拉取模型
+- **fake 模式（测试）**：`story-rewrite`（默认），使用 FakeModelClient，不访问网络
+
+详见 `agent.md` §5 和 §12。
 
 ## Codex 沙箱说明
 

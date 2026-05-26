@@ -11,12 +11,18 @@ requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.0",
     "PyYAML>=6.0",
+    "httpx>=0.24",
+    "streamlit>=1.30",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
 ]
+
+[project.scripts]
+story-rewrite = "novel_rewrite_system.cli:main"
+story-rewrite-webui = "novel_rewrite_system.webui:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -48,6 +48,24 @@ metadata = save_manual_source("projects/demo", manual_input)
 
 保存时会去除标题和正文首尾空白，并将换行统一为 `\n`。如果 `source_id` 为空、为 `.` / `..`、包含路径分隔符，或 `title` / `text` 为空，`save_manual_source` 会抛出 `ValueError`。
 
+## 最小 WebUI
+
+第一版 WebUI 使用 Streamlit，默认 `fake` 模式，不访问网络、不需要本地 GPU。`cloud-only` 模式会把风格分析、初稿生成和改写都交给 DeepSeek API，需要先设置 `DEEPSEEK_API_KEY`。
+
+启动方式：
+
+```bash
+streamlit run src/novel_rewrite_system/webui.py
+```
+
+安装为可编辑包后也可以使用脚本入口：
+
+```bash
+story-rewrite-webui
+```
+
+手动验收建议：先在页面选择 `fake`，填写项目路径、参考文本和创作需求后点击运行，确认页面显示风格分析、初稿、改写结果和输出路径；再在未配置 `DEEPSEEK_API_KEY` 时选择 `cloud-only`，确认页面提示 API key 缺失；配置 API key 后可用短文本小样例人工验收 cloud-only。WebUI 不访问 Ollama，也不需要本地 GPU。
+
 ## 项目文档
 
 - [开发环境基线](docs/dev_environment.md)
@@ -62,6 +80,16 @@ metadata = save_manual_source("projects/demo", manual_input)
 ```powershell
 py -3.11 -m venv .venv
 .venv\Scripts\activate
+python -m pip install -U pip
+python -m pip install -e .[dev]
+python -m pytest
+```
+
+WSL / Linux 下可使用：
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
 python -m pip install -U pip
 python -m pip install -e .[dev]
 python -m pytest
