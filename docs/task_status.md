@@ -8,7 +8,7 @@
 | Task A | 文本切分模块 | 已完成 | 文本处理 | Codex | `TextChunk` 与 `split_text` 纯函数文本切分 | `TextChunk`; `split_text(...) -> list[TextChunk]` | `python3 -m pytest -s tests` | 交接记录：[2026-05-26_task-a_text-chunking.md](handoffs/2026-05-26_task-a_text-chunking.md)；测试结果：`37 passed` |
 | Task B | 用户需求结构化数据模型 | 已完成 | 用户需求 | Codex | `StoryRequirement` Pydantic 模型和 `from_text` 占位入口 | `StoryRequirement`; `StoryRequirement.from_text(raw_text: str) -> StoryRequirement` | `python3 -m pytest -q -s tests/test_requirements.py`; `python3 -m pytest -q -s` | 交接记录：[`2026-05-26_task-b_story-requirements.md`](handoffs/2026-05-26_task-b_story-requirements.md) |
 | Task C | 模型接口抽象层 | 已完成 | 模型调用 | Codex | `ModelRequest`、`ModelResponse`、`ModelClient`、`FakeModelClient` | `ModelClient.generate(request: ModelRequest) -> ModelResponse`; `FakeModelClient.last_request` | `pytest -s` | 交接记录：[2026-05-26_task-c_model-interface.md](handoffs/2026-05-26_task-c_model-interface.md) |
-| Parallel Task 1 | 手动参考文本输入与保存 | 进行中 | 参考文本输入 | 待补充 | 待完成 | 待从实现中补充 | 待补充 | 并行任务，完成后需补充输出和测试结果 |
+| Parallel Task 1 | 手动参考文本输入与保存 | 已完成 | 参考文本输入 | Codex | `ManualTextInput`、`ManualSourceMetadata` 和 `save_manual_source`，可将手动粘贴正文保存到项目 `sources/` 目录并写入 JSON 元数据 | `ManualTextInput`; `ManualSourceMetadata`; `save_manual_source(project_path, manual_input, *, created_at=None) -> ManualSourceMetadata` | `python3 -m pytest -q -s tests/test_sources.py`; `python3 -m pytest -q -s` | 已同步 README 与接口登记；覆盖正文/元数据写入、空正文拒绝、非法 `source_id` 拒绝 |
 
 ## 状态说明
 
